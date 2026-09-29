@@ -34,7 +34,13 @@ public class Main {
 		int choix;
 		String desChoix;
 		int valeur;
+		
 		int point;
+		
+        int totalAttaques = 10_000;
+        int nbCritiques = 0;
+        int serieActuelle = 0;
+        int maxSerie = 0;
 
 		do {
 			afficherMenu();
@@ -85,6 +91,7 @@ public class Main {
 					}
 				} while (!desChoix.equals("d4") && !desChoix.equals("d6") && !desChoix.equals("d8") && !desChoix.equals("d10") && !desChoix.equals("d12") && !desChoix.equals("d20"));
 				break;
+				
 			case 2:
 				System.out.println("*tap 0 pour exit au menu.");
 				do {
@@ -96,7 +103,32 @@ public class Main {
 					else { System.out.println(point + "pts correspond au Rang Légende"); }
 				} while ( point != 0 );
 				break;
+				
 			case 3:
+		        Random random = new Random();
+
+		        for (int i = 0; i < totalAttaques; i++) {
+		            
+		            boolean estCritique = Math.random() < 0.15;
+
+		            if (estCritique) {
+		                nbCritiques++;
+		                serieActuelle++;
+		                
+		                if (serieActuelle > maxSerie) {
+		                    maxSerie = serieActuelle;
+		                }
+		            } else {
+		                serieActuelle = 0;
+		            }
+		        }
+
+		        double pourcentageReel = ((double) nbCritiques / totalAttaques) * 100;
+
+		        System.out.println("\n=== Résultats de la simulation ===");
+		        System.out.println("Nombre total de critiques : " + nbCritiques);
+		        System.out.println("Pourcentage réel obtenu : " + pourcentageReel + "%");
+		        System.out.println("Plus longue série de critiques consécutifs : " + maxSerie);
 				break;
 			
 			default:
