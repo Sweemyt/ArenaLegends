@@ -105,7 +105,6 @@ public class Main {
 				break;
 				
 			case 3:
-		        Random random = new Random();
 
 		        for (int i = 0; i < totalAttaques; i++) {
 		            
